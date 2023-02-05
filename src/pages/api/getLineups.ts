@@ -1,5 +1,5 @@
 const baseUrlSalibandy = 'https://api.salibandy.fi/lineup/all/';
-const baseUrlFliiga = 'https://api.fliiga.fi/lineup/all/';
+const baseUrlFliiga = 'https://api.fliiga.com/lineup/all/';
 import _ from 'lodash';
 
 type Team = {
