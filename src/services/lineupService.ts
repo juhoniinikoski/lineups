@@ -98,23 +98,28 @@ const parseLineups = (results: Result[]): Lineups[] => {
   return lineups;
 };
 
-const getLineups = async (
+export const getLineups = async (
   type: string,
   matchNro: string,
-): Promise<Lineups[]> => {
+): Promise<Lineups[] | null> => {
   let result: Response;
 
-  if (type === 'fliiga') {
-    result = await fetch(`${baseUrlFliiga}${matchNro}`);
-  } else {
-    result = await fetch(`${baseUrlSalibandy}${matchNro}`);
+  try {
+    if (type === 'fliiga') {
+      result = await fetch(`${baseUrlFliiga}${matchNro}`);
+    } else {
+      result = await fetch(`${baseUrlSalibandy}${matchNro}`);
+    }
+
+    const body = await result.json();
+    if (body.lineup.length > 0) {
+      const lineups = parseLineups(body.lineup);
+
+      return lineups;
+    }
+
+    return [];
+  } catch (error) {
+    return null;
   }
-
-  const body = await result.json();
-
-  const lineups = parseLineups(body.lineup);
-
-  return lineups;
 };
-
-export default getLineups;

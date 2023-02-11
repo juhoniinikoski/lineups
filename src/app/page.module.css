@@ -9,6 +9,7 @@
 
 .center {
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -44,8 +45,14 @@
   padding: 8px;
   border: none;
   width: 100%;
+  text-align: center;
 }
 
 .center form {
+  z-index: 1000;
+  width: 60vw;
+}
+
+.center p {
   z-index: 1000;
 }
